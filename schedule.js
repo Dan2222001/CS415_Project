@@ -275,7 +275,9 @@ backButton.addEventListener("click", () => {
     }
   }
 
-  window.location.href = "index.html";
+  const params = new URLSearchParams(window.location.search);
+  const destination = params.get("from") === "results" ? "results.html" : "index.html";
+  window.location.href = destination;
 });
 
 window.addEventListener("beforeunload", event => {

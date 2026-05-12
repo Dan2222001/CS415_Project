@@ -22,6 +22,7 @@ body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #111827; bac
 .result-top { display: flex; justify-content: space-between; align-items: center; }
 .result-code { font-size: 31px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
 .result-title { margin-top: 6px; font-size: 31px; color: #4b5563; }
+.result-description { margin-top: 8px; font-size: 16px; color: #4b5563; line-height: 1.4; max-width: 700px; }
 .full-badge { color: #fff; background: #ef4444; font-size: 14px; border-radius: 999px; padding: 3px 9px; }
 .result-toggle { border: none; background: none; color: #3f5af5; font-size: 30px; cursor: pointer; }
 .result-details { display: none; margin-top: 12px; border-top: 1px solid #e5e7eb; padding-top: 12px; }
