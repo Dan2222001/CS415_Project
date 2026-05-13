@@ -202,6 +202,58 @@ const mockResults = [
   }
 ];
 
+
+const defaultScheduleClasses = [
+  {
+    id: "cs410",
+    code: "CS 410",
+    title: "Intro to Software Engineering",
+    days: ["Mon", "Wed"],
+    startTime: "15:30",
+    endTime: "17:00",
+    displayTime: "3:30 PM - 5:00 PM",
+    teacher: "Prof. Deblois",
+    classroom: "Engineering Hall 201",
+    credits: 3,
+    description: "Introduction to software development processes, project planning, teamwork, testing, and maintaining larger software systems.",
+    email: "deblois@university.edu",
+    dropDeadline: "May 1, 2026",
+    selected: true
+  },
+  {
+    id: "cs415",
+    code: "CS 415",
+    title: "UI Design",
+    days: ["Tue", "Thu"],
+    startTime: "14:00",
+    endTime: "15:15",
+    displayTime: "2:00 PM - 3:15 PM",
+    teacher: "Prof. Babur",
+    classroom: "Design Hall 104",
+    credits: 3,
+    description: "Covers principles of user interface design, usability, wireframing, prototyping, and evaluating user-centered designs.",
+    email: "babur@university.edu",
+    dropDeadline: "May 3, 2026",
+    selected: true
+  },
+  {
+    id: "french101",
+    code: "French 101",
+    title: "Elementary French",
+    days: ["Fri"],
+    startTime: "14:00",
+    endTime: "17:00",
+    displayTime: "2:00 PM - 5:00 PM",
+    teacher: "Prof. Gustave",
+    classroom: "Language Hall 12",
+    credits: 4,
+    description: "An introductory course focused on basic French vocabulary, grammar, pronunciation, reading, and conversation.",
+    email: "gustave@university.edu",
+    dropDeadline: "May 2, 2026",
+    selected: true
+  }
+];
+
 const chipRow = document.getElementById("chipRow");
 const resultsList = document.getElementById("resultsList");
 const searchCriteria = JSON.parse(sessionStorage.getItem("searchCriteria") || "{}");
@@ -210,7 +262,7 @@ hydrateAddedStateFromSchedule();
 render();
 
 function hydrateAddedStateFromSchedule() {
-  const scheduleClasses = JSON.parse(sessionStorage.getItem("scheduleClasses") || "[]");
+  const scheduleClasses = getScheduleClasses();
   const ids = new Set(scheduleClasses.map(course => course.id));
   mockResults.forEach(course => {
     course.added = ids.has(course.id);
@@ -293,7 +345,7 @@ function render() {
 }
 
 function syncScheduleClasses() {
-  const current = JSON.parse(sessionStorage.getItem("scheduleClasses") || "[]");
+  const current = getScheduleClasses();
   const byId = new Map(current.map(course => [course.id, course]));
 
   mockResults.forEach(course => {
@@ -325,7 +377,7 @@ function matchesCriteria(item) {
 }
 
 function hasTimeConflict(candidateCourse) {
-  const current = JSON.parse(sessionStorage.getItem("scheduleClasses") || "[]");
+  const current = getScheduleClasses();
 
   return current.some(existing => {
     if (existing.id === candidateCourse.id) {
@@ -349,6 +401,16 @@ function hasTimeConflict(candidateCourse) {
 function toMinutes(timeString) {
   const [hours, minutes] = timeString.split(":").map(Number);
   return hours * 60 + minutes;
+}
+
+function getScheduleClasses() {
+  const saved = sessionStorage.getItem("scheduleClasses");
+
+  if (!saved) {
+    return JSON.parse(JSON.stringify(defaultScheduleClasses));
+  }
+
+  return JSON.parse(saved);
 }
 
 function extractCourseNumber(code) {
