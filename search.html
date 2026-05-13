@@ -22,19 +22,25 @@
         <option>Fall 2026</option>
       </select>
 
-      <label for="subjectSelect">Subject</label>
-      <select id="subjectSelect">
-        <option value="">Select a subject</option>
-        <option value="CS">Computer Science</option>
-        <option value="MATH">Mathematics</option>
-        <option value="STAT">Statistics</option>
-      </select>
+      <label for="subjectInput">Subject</label>
+      <div class="subject-autocomplete">
+        <input id="subjectInput" placeholder="Type or select a subject" autocomplete="off" />
+        <div id="subjectSuggestions" class="subject-suggestions" hidden></div>
+      </div>
 
       <label for="courseNumber">Course Number</label>
-      <input id="courseNumber" placeholder="Enter course number" />
+      <input id="courseNumber" placeholder="Enter course number (ex: 3745)" />
 
-      <button id="addCriteriaButton" class="outline-button" type="button">Add criteria</button>
-      <div id="criteriaList" class="criteria-list" aria-live="polite"></div>
+      <button id="moreCriteriaButton" class="outline-button" type="button">Additional Criteria</button>
+
+      <div class="extra-criteria" aria-label="Additional criteria options">
+        <label><input id="morningOnly" type="checkbox" /> Morning classes only</label>
+        <label><input id="eveningOnly" type="checkbox" /> Evening classes only</label>
+        <label><input id="openSeatsOnly" type="checkbox" /> Open seats only</label>
+        <label><input id="onlineOnly" type="checkbox" /> Online / hybrid option</label>
+        <label><input id="majorReqOnly" type="checkbox" /> Meets major requirement</label>
+      </div>
+
     </section>
 
     <section class="bottom-actions">
